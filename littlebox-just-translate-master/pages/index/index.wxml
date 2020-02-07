@@ -1,0 +1,41 @@
+<!--index.wxml-->
+<view class="just-translate-container">
+  <view class="just-translate-header-container">
+    <view class="just-translate-header-lang-container">
+      <picker bindchange="changeSourceLang" value="{{src_lang_index}}" range="{{src_langs}}">
+        <view class="just-translate-header-lang-single-container">
+          {{src_langs[src_lang_index]}}
+        </view>
+      </picker>
+      <image src="{{right_arrow_icon}}" class="just-translate-header-lang-single-icon"></image>
+      <picker bindchange="changeDestinationLang" value="{{dst_lang_index}}" range="{{dst_langs}}">
+        <view class="just-translate-header-lang-single-container">
+          {{dst_langs[dst_lang_index]}}
+        </view>
+      </picker>
+    </view>
+    <view class="just-translate-header-icons-container">
+      <view wx:if="{{showAction}}" class="just-translate-header-icon-container" bindtap="pauseRecord" style="border-color: orange;margin-right: 10px;">
+        <text class="just-translate-header-icon-text" style="color: orange;" id="pauseBtn">Pause</text>
+      </view>
+      <view class="just-translate-header-icon-container" bindtap="checkCanRecord" style="{{iconBorderStyle}}">
+        <i class="iconfont icon-microphone-black-shape just-translate-header-icon"></i>
+        <text class="just-translate-header-icon-text" style="{{iconStyle}}">{{isRecording === 2 ? 'ON' : isRecording === 1 ? 'Pause' : 'Off'}}</text>
+      </view>
+      <view wx:if="{{showAction}}" class="just-translate-header-icon-container" id="stopBtn" bindtap="stopRecord" style="border-color: red;margin-left: 10px;">
+        <text class="just-translate-header-icon-text" style="color: red;">Off</text>
+      </view>
+    </view>
+  </view>
+  <view class="just-translate-body-container">
+    <scroll-view class="just-translate-body-real-container" scroll-y scroll-top="{{scrollTop}}">
+      <view class="just-translate-body-content" id="scroll-container" wx:for='{{transltedTextArray}}'>
+        <text>{{transltedTextArray[index]}}</text>
+      </view>
+      <view wx:if="{{hasPending}}" class="just-translate-body-pending">... 正在识别，请稍等 ...</view>
+    </scroll-view>
+  </view>
+  <view class="just-translate-footer-container">
+    <text class="just-translate-footer-copyright">{{copyRight}}</text>
+  </view>
+</view>

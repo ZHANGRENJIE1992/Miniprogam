@@ -1,0 +1,6 @@
+/.travis.yml
+/app/.DS_Store
+/appveyor.yml
+/node_modules/
+/logs/
+/run/
